@@ -1,0 +1,287 @@
+day2: SEPT 6:
+
+
+CREATE TABLE student(
+sid INT(5),
+snm VARCHAR(25),
+gender VARCHAR(10),
+age INT(3));
+
+FIRST INSERTION:::::::::::
+
+INSERT student values(123,'swe', 'female', '20');
+Query OK, 1 row affected (0.07 sec)
+
+MariaDB [MYTESTDB]> SELECT * FROM student;
++------+------+--------+------+
+| sid  | snm  | gender | age  |
++------+------+--------+------+
+|  123 | swe  | female |   20 |
++------+------+--------+------+
+
+SECOND INSERTION:::::::
+
+INSERT INTO student values(1,'swe1', 'female', '35');
+Query OK, 1 row affected (0.06 sec)
+
+MariaDB [MYTESTDB]> SELECT * FROM student;
++------+------+--------+------+
+| sid  | snm  | gender | age  |
++------+------+--------+------+
+|  123 | swe  | female |   20 |
+|    1 | swe1 | female |   35 |
++------+------+--------+------+
+
+THIRD INSERTION:::::
+
+INSERT INTO student (sid,snm,gender,age)  values(2,'swe2', 'female', '35');
+Query OK, 1 row affected (0.05 sec)
+
+MariaDB [MYTESTDB]> SELECT * FROM student;
++------+------+--------+------+
+| sid  | snm  | gender | age  |
++------+------+--------+------+
+|  123 | swe  | female |   20 |
+|    1 | swe1 | female |   35 |
+|    2 | swe2 | female |   35 |
++------+------+--------+------+
+
+SELECT * FROM student;
++------+------+--------+------+
+| sid  | snm  | gender | age  |
++------+------+--------+------+
+|  123 | swe  | female |   20 |
+|    1 | swe1 | female |   35 |
+|    2 | swe2 | female |   35 |
+|    3 | swe3 | female |   40 |
++------+------+--------+------+
+
+
+INSERTING ANOTHER RECORD::::::
+
+ INSERT INTO student (sid,snm,gender,age)  values(4,'swe4', 'female', '45');
+Query OK, 1 row affected (0.04 sec)
+
+MariaDB [MYTESTDB]> SELECT * FROM student;
++------+------+--------+------+
+| sid  | snm  | gender | age  |
++------+------+--------+------+
+|  123 | swe  | female |   20 |
+|    1 | swe1 | female |   35 |
+|    2 | swe2 | female |   35 |
+|    3 | swe3 | female |   40 |
+|    4 | swe4 | female |   45 |
++------+------+--------+------+
+
+SELECT sid,snm FROM student;
++------+------+
+| sid  | snm  |
++------+------+
+|  123 | swe  |
+|    1 | swe1 |
+|    2 | swe2 |
+|    3 | swe3 |
+|    4 | swe4 |
++------+------+
+
+
+SELECT * FROM student WHERE GENDER='MALE';
+Empty set (0.00 sec)
+
+MariaDB [MYTESTDB]> INSERT INTO student (sid,snm,gender,age)  values(5,'swe5', 'male', '45');
+Query OK, 1 row affected (0.09 sec)
+
+ SELECT * FROM student WHERE GENDER='MALE';
++------+------+--------+------+
+| sid  | snm  | gender | age  |
++------+------+--------+------+
+|    5 | swe5 | male   |   45 |
++------+------+--------+------+
+
+SELECT * FROM studENT LIMIT 2;
++------+------+--------+------+
+| sid  | snm  | gender | age  |
++------+------+--------+------+
+|  123 | swe  | female |   20 |
+|    1 | swe1 | female |   35 |
++------+------+--------+------+
+
+ SELECT * FROM studENT LIMIT 3;
++------+------+--------+------+
+| sid  | snm  | gender | age  |
++------+------+--------+------+
+|  123 | swe  | female |   20 |
+|    1 | swe1 | female |   35 |
+|    2 | swe2 | female |   35 |
++------+------+--------+------+
+
+ SELECT * FROM student WHERE GENDER='MALE'AND  SID=5;
++------+------+--------+------+
+| sid  | snm  | gender | age  |
++------+------+--------+------+
+|    5 | swe5 | male   |   45 |
++------+------+--------+------+
+
+ SELECT * FROM student WHERE GENDER='MALE' OR SID=3;
++------+------+--------+------+
+| sid  | snm  | gender | age  |
++------+------+--------+------+
+|    3 | swe3 | female |   40 |
+|    5 | swe5 | male   |   45 |
++------+------+--------+------+
+
+
+DESC STUDENT;
++--------+-------------+------+-----+---------+-------+
+| Field  | Type        | Null | Key | Default | Extra |
++--------+-------------+------+-----+---------+-------+
+| sid    | int(5)      | YES  |     | NULL    |       |
+| snm    | varchar(25) | YES  |     | NULL    |       |
+| gender | varchar(10) | YES  |     | NULL    |       |
+| age    | int(3)      | YES  |     | NULL    |       |
++--------+-------------+------+-----+---------+-------+
+4 rows in set (0.00 sec)
+
+MariaDB [MYTESTDB]> DESCRIBE STUDENT;
++--------+-------------+------+-----+---------+-------+
+| Field  | Type        | Null | Key | Default | Extra |
++--------+-------------+------+-----+---------+-------+
+| sid    | int(5)      | YES  |     | NULL    |       |
+| snm    | varchar(25) | YES  |     | NULL    |       |
+| gender | varchar(10) | YES  |     | NULL    |       |
+| age    | int(3)      | YES  |     | NULL    |       |
++--------+-------------+------+-----+---------+-------+
+
+
+ show create table student\G
+*************************** 1. row ***************************
+       Table: student
+Create Table: CREATE TABLE `student` (
+  `sid` int(5) DEFAULT NULL,
+  `snm` varchar(25) DEFAULT NULL,
+  `gender` varchar(10) DEFAULT NULL,
+  `age` int(3) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1
+1 row in set (0.00 sec) 
+
+
+ SELECT * FROM student WHERE AGE BETWEEN 20 AND 30;
++------+------+--------+------+
+| sid  | snm  | gender | age  |
++------+------+--------+------+
+|  123 | swe  | female |   20 |
++------+------+--------+------+
+
+
+DESC STUDENT;
++--------+-------------+------+-----+---------+-------+
+| Field  | Type        | Null | Key | Default | Extra |
++--------+-------------+------+-----+---------+-------+
+| sid    | int(5)      | YES  |     | NULL    |       |
+| snm    | varchar(25) | YES  |     | NULL    |       |
+| gender | varchar(10) | YES  |     | NULL    |       |
+| age    | int(3)      | YES  |     | NULL    |       |
++--------+-------------+------+-----+---------+-------+
+4 rows in set (0.00 sec)
+
+MariaDB [MYTESTDB]> ALTER TABLE STUDENT ADD MARKS INT(5);
+Query OK, 0 rows affected (0.47 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+MariaDB [MYTESTDB]> DESC STUDENT;
++--------+-------------+------+-----+---------+-------+
+| Field  | Type        | Null | Key | Default | Extra |
++--------+-------------+------+-----+---------+-------+
+| sid    | int(5)      | YES  |     | NULL    |       |
+| snm    | varchar(25) | YES  |     | NULL    |       |
+| gender | varchar(10) | YES  |     | NULL    |       |
+| age    | int(3)      | YES  |     | NULL    |       |
+| MARKS  | int(5)      | YES  |     | NULL    |       |
++--------+-------------+------+-----+---------+-------+
+5 rows in set (0.02 sec)
+
+MariaDB [MYTESTDB]> SELECT * FROM student;
++------+------+--------+------+-------+
+| sid  | snm  | gender | age  | MARKS |
++------+------+--------+------+-------+
+|  123 | swe  | female |   20 |  NULL |
+|    1 | swe1 | female |   35 |  NULL |
+|    2 | swe2 | female |   35 |  NULL |
+|    3 | swe3 | female |   40 |  NULL |
+|    4 | swe4 | female |   45 |  NULL |
+|    5 | swe5 | male   |   45 |  NULL |
++------+------+--------+------+-------+
+6 rows in set (0.00 sec)
+
+MariaDB [MYTESTDB]> ALTER TABLE STUDENT ADD CITY VARCHAR(50) AFTER GENDER;
+Query OK, 0 rows affected (0.34 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+MariaDB [MYTESTDB]> SELECT * FROM student;
++------+------+--------+------+------+-------+
+| sid  | snm  | gender | CITY | age  | MARKS |
++------+------+--------+------+------+-------+
+|  123 | swe  | female | NULL |   20 |  NULL |
+|    1 | swe1 | female | NULL |   35 |  NULL |
+|    2 | swe2 | female | NULL |   35 |  NULL |
+|    3 | swe3 | female | NULL |   40 |  NULL |
+|    4 | swe4 | female | NULL |   45 |  NULL |
+|    5 | swe5 | male   | NULL |   45 |  NULL |
++------+------+--------+------+------+-------+
+6 rows in set (0.00 sec)
+
+
+SELECT SID 'STUDENT ID' from student;
++------------+
+| STUDENT ID |
++------------+
+|        123 |
+|          1 |
+|          2 |
+|          3 |
+|          4 |
+|          5 |
++------------+
+6 rows in set (0.00 sec)
+
+MariaDB [MYTESTDB]> SELECT SID "STUDENT ID" from student;
++------------+
+| STUDENT ID |
++------------+
+|        123 |
+|          1 |
+|          2 |
+|          3 |
+|          4 |
+|          5 |
++------------+
+6 rows in set (0.00 sec)
+
+MariaDB [MYTESTDB]> SELECT SID "STUDENT_ID" from student;
++------------+
+| STUDENT_ID |
++------------+
+|        123 |
+|          1 |
+|          2 |
+|          3 |
+|          4 |
+|          5 |
++------------+
+6 rows in set (0.00 sec)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
